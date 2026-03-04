@@ -20,6 +20,7 @@ func HandleWebhook(w http.ResponseWriter, r *http.Request) {
 	var result map[string]interface{}
 
 	json.NewDecoder(r.Body).Decode(&result)
+	fmt.Println(r.Header)
 	fmt.Println(result)
 }
 
