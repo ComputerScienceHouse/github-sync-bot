@@ -1,14 +1,16 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 )
 
 func HandleWebhook(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("hi")
+	var result map[string]any
 
+	json.NewDecoder(r.Body).Decode(&result)
 	fmt.Println(r.Body)
 }
 
