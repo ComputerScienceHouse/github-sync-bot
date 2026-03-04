@@ -8,10 +8,10 @@ import (
 )
 
 func HandleWebhook(w http.ResponseWriter, r *http.Request) {
-	var result map[string]any
+	var result map[string]interface{}
 
 	json.NewDecoder(r.Body).Decode(&result)
-	fmt.Println(r.Body)
+	fmt.Println(result)
 }
 
 func main() {
