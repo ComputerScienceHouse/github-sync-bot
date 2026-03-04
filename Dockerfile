@@ -8,7 +8,7 @@ RUN apk add git
 
 COPY go.* .
 RUN go mod download 
-COPY *.go .
+COPY . .
 RUN go build -v -o sync
 
 FROM docker.io/alpine

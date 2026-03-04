@@ -1,0 +1,5 @@
+services:
+  sync:
+    build: .
+    container_name: sync
+    env_file: ".env"

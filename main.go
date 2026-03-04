@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 
-	ghauth "github.com/ComputerScienceHouse/github-sync-bot/gh-auth"
+	"github.com/ComputerScienceHouse/github-sync-bot/ghauth"
 	"github.com/joho/godotenv"
 )
 

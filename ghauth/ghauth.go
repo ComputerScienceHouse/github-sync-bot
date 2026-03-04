@@ -156,6 +156,7 @@ func GetGithubJWTToken() string {
 }
 
 func GetPrivateKeyFromStr(key string) (*rsa.PrivateKey, error) {
+	println(key)
 	keyBlock, _ := pem.Decode([]byte(key))
 
 	if keyBlock == nil {
