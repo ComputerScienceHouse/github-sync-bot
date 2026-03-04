@@ -14,8 +14,6 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 )
 
-var client *http.Client
-
 type GhTokenInfo struct {
 	token   string
 	expTime time.Time
@@ -25,8 +23,18 @@ func (tokenInfo *GhTokenInfo) IsValid() bool {
 	return tokenInfo.expTime.After(time.Now().Add(time.Duration(-30*1000)))
 }
 
+func (tokenInfo *GhTokenInfo) GetToken() string {
+	if tokenInfo.IsValid() {
+		return tokenInfo.token
+	}
+
+	tokenInfo.Update()
+	return tokenInfo.GetToken()
+}
+
 func (tokenInfo *GhTokenInfo) Update() error {
 	jwtToken := GetGithubJWTToken()
+	client := &http.Client{}
 
 	installationInfoReq, err := http.NewRequest("GET", "https://api.github.com/orgs/ComputerScienceHouse/installation", nil)
 
@@ -102,7 +110,6 @@ var tokenInfo GhTokenInfo
 
 func SetupGHAuth() (*GhTokenInfo, error) {
 	tokenInfo = GhTokenInfo{}
-	client = &http.Client{}
 
 	err := tokenInfo.Update()
 

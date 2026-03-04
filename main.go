@@ -26,6 +26,17 @@ func HandleWebhook(w http.ResponseWriter, r *http.Request, tokenInfo *ghauth.GhT
 }
 
 func HandlePRReview(result map[string]interface{}, tokenInfo *ghauth.GhTokenInfo) {
+	// client := http.Client{}
+
+	println(result["review"])
+
+	_, err := http.NewRequest("GET", "https://api.github.com/repos/ComputerScienceHouse", nil)
+
+	if err != nil {
+		log.Println("error creating request")
+		return
+	}
+
 
 }
 
