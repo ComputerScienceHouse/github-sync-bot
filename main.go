@@ -20,7 +20,7 @@ func HandleWebhook(w http.ResponseWriter, r *http.Request) {
 	var result map[string]interface{}
 
 	json.NewDecoder(r.Body).Decode(&result)
-	fmt.Println(result["review"])
+	fmt.Println(result)
 }
 
 func main() {
@@ -149,14 +149,11 @@ func GetPrivateKeyFromStr(key string) (*rsa.PrivateKey, error) {
 	keyBlock, _ := pem.Decode([]byte(key))
 
 	if keyBlock == nil {
-		log.Fatal("Failed to decode PEM block from private key")
+		log.Println("Failed to decode PEM block from private key")
+		return nil, errors.New("Failed to decode PEM block from private key")
 	}
 
 	privateKey, err := x509.ParsePKCS1PrivateKey(keyBlock.Bytes)
-
-	// if err == nil {
-	// 	return privateKey, nil
-	// }
 
 	return privateKey, err
 }
