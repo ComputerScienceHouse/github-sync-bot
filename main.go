@@ -11,7 +11,7 @@ func HandleWebhook(w http.ResponseWriter, r *http.Request) {
 	var result map[string]interface{}
 
 	json.NewDecoder(r.Body).Decode(&result)
-	fmt.Println(result)
+	fmt.Println(result["review"])
 }
 
 func main() {
